@@ -238,10 +238,12 @@ image **load_alphabet()
 void draw_detections(image im, int num, float thresh, box *boxes, float **probs, float **masks, char **names, image **alphabet, int classes)
 {
     int i,j;
+	int count = 0;
 
     for(i = 0; i < num; ++i){
         char labelstr[4096] = {0};
         int class = -1;
+		int temp_probs = 0;
         for(j = 0; j < classes; ++j){
             if (probs[i][j] > thresh){
                 if (class < 0) {
@@ -251,7 +253,9 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
                     strcat(labelstr, ", ");
                     strcat(labelstr, names[j]);
                 }
-                printf("%s: %.0f%%\n", names[j], probs[i][j]*100);
+                //printf("%s: %.0f%%\n", names[j], probs[i][j]*100);
+				//fprintf(stdout, "%s: %.0f%%\n", names[j], probs[i][j]*100);
+				temp_probs = probs[i][j] * 100;
             }
         }
         if(class >= 0){
@@ -287,6 +291,8 @@ void draw_detections(image im, int num, float thresh, box *boxes, float **probs,
             if(right > im.w-1) right = im.w-1;
             if(top < 0) top = 0;
             if(bot > im.h-1) bot = im.h-1;
+
+			fprintf(stdout, " %d %d %d %d %d %d\n", count++, temp_probs, left, top, right - left, bot - top);
 
             draw_box_width(im, left, top, right, bot, width, red, green, blue);
             if (alphabet) {
