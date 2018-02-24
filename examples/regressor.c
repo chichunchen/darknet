@@ -137,7 +137,9 @@ void predict_regressor(char *cfgfile, char *weightfile, char *filename)
         time=clock();
         float *predictions = network_predict(net, X);
         printf("Predicted: %f\n", predictions[0]);
+#ifdef DEBUG
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+#endif
         free_image(im);
         free_image(sized);
         if (filename) break;

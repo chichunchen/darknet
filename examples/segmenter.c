@@ -165,7 +165,9 @@ void predict_segmenter(char *datafile, char *cfg, char *weights, char *filename)
         cvWaitKey(0);
 #endif
         printf("Predicted: %f\n", predictions[0]);
+#ifdef DEBUG
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+#endif
         free_image(im);
         free_image(sized);
         free_image(prmask);

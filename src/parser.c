@@ -657,10 +657,14 @@ network *parse_network_cfg(char *filename)
     n = n->next;
     int count = 0;
     free_section(s);
+#ifdef DEBUG
     fprintf(stderr, "layer     filters    size              input                output\n");
+#endif
     while(n){
         params.index = count;
+#ifdef DEBUG
         fprintf(stderr, "%5d ", count);
+#endif
         s = (section *)n->val;
         options = s->options;
         layer l = {0};

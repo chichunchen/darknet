@@ -327,7 +327,9 @@ void test_coco(char *cfgfile, char *weightfile, char *filename, float thresh)
         float *X = sized.data;
         time=clock();
         network_predict(net, X);
+#ifdef DEBUG
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+#endif
         get_detection_boxes(l, 1, 1, thresh, probs, boxes, 0);
         if (nms) do_nms_sort(boxes, probs, l.side*l.side*l.n, l.classes, nms);
         draw_detections(im, l.side*l.side*l.n, thresh, boxes, probs, 0, coco_classes, alphabet, 80);

@@ -415,7 +415,9 @@ void test_dcgan(char *cfgfile, char *weightfile)
         image out = get_network_image_layer(net, imlayer);
         //yuv_to_rgb(out);
         normalize_image(out);
+#ifdef DEBUG
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+#endif
         show_image(out, "out");
         save_image(out, "out");
 #ifdef OPENCV
@@ -1082,7 +1084,9 @@ void test_lsd(char *cfg, char *weights, char *filename, int gray)
         image out = get_network_image_layer(net, imlayer);
         //yuv_to_rgb(out);
         constrain_image(out);
+#ifdef DEBUG
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+#endif
         show_image(out, "out");
         show_image(crop, "crop");
         save_image(out, "out");

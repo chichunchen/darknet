@@ -537,7 +537,9 @@ void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filena
          */
 
         top_predictions(net, top, indexes);
+#ifdef DEBUG
         printf("%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+#endif
         for(i = 0; i < top; ++i){
             int index = indexes[i];
             printf("%s: %f\n", names[index], predictions[index]);
